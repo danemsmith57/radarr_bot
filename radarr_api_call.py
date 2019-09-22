@@ -95,8 +95,18 @@ def post_movie(url, title, qualityProfileId, titleSlug, images, tmdbId, year, pa
 #---------------------------------POST------------------------------------------
 
 def main():
-    url = 'http://localhost:7878/api/movies/command?apikey=f7478ccfcd3d4f2da5d5583228df15c9'
 
+#will this need to be done??? how does slackbot talk to me?
+    # url = sys.argv[0]
+    # title = sys.argv[1]
+    # qualityProfileId = sys.argv[2]
+    # titleSlug = sys.argv[3]
+    # image = sys.argv[4]
+    # tmdbId = sys.argv[5]
+    # year = sys.argv[6]
+    # path = sys.argv[7]
+
+    url = 'http://localhost:7878/api/movies/command?apikey=f7478ccfcd3d4f2da5d5583228df15c9'
     title = "Assassin's Creed"
     qualityProfileId = 6
     titleSlug = "assassins-creed-121856"
@@ -114,40 +124,3 @@ def main():
 
 if __name__ == '__main__':
     main()
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-# soup = BeautifulSoup(read_response, 'html.parser')
-# json_object = json.loads(read_response)
-
-# json.dumps() — Takes in a Python object, and converts (dumps) it to a string.
-# json.loads() — Takes a JSON string, and converts (loads) it to a Python object.
-
-#-------------------------------------------------------------------------------
-# radarr_url = 'http://localhost:7878/api/addmovies'
-#
-# data = requests.get(radarr_url)
-# soup = BeautifulSoup(data.text, 'html.parser')
-#
-# #finds first occurence of <script> tag and outputs it as text
-# clean_soup = soup.find('script').text.split('=')[1].replace(';','')
-#
-# print("clean soup: \n {}".format(clean_soup))
-#
-# #wrap clean_soup in double quotes for json_object
-# clean_soup = '"{}"'.format(clean_soup)
-# print("quotes added clean_soup: \n {} ".format(clean_soup))
