@@ -88,6 +88,8 @@ def post_movie(url, title, qualityProfileId, titleSlug, images, tmdbId, year, pa
         print("json_object: \n {}".format(new_movie))
 
         post_response = requests.post(url = url, data = new_movie)
+        print("\n")
+        print("post_reponse: \n {}".format(post_response.json()))
     except ValueError as err:
         print("An error occured: {} \n exiting...".format(err))
         exit
@@ -106,6 +108,7 @@ def main():
     # year = sys.argv[6]
     # path = sys.argv[7]
 
+    #the below are for testing purposes, will remove once Nick has Server set up
     url = 'http://localhost:7878/api/movies/command?apikey=f7478ccfcd3d4f2da5d5583228df15c9'
     title = "Assassin's Creed"
     qualityProfileId = 6
