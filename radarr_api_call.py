@@ -61,6 +61,11 @@ print("url_response: {} \n".format(get_response))
 
 get_response_data = get_response.json()
 print("response_data: \n {} \n".format(get_response_data))
+
+
+def get_movie_by_id(url, id):
+    params = {"id" : "{}".format(int(id))}
+    get_response = requests.get(url = url, params = params)
 #---------------------------------GET-------------------------------------------
 
 #---------------------------------POST------------------------------------------
@@ -80,9 +85,9 @@ def post_movie(url, title, qualityProfileId, titleSlug, images, tmdbId, year, pa
 
         #creates new json object
         new_movie = json.dumps(new_movie)
-        print("new_movie as json: \n {}".format(new_movie))
+        print("json_object: \n {}".format(new_movie))
 
-        # post_response = requests.post(url = url, data = new_movie)
+        post_response = requests.post(url = url, data = new_movie)
     except ValueError as err:
         print("An error occured: {} \n exiting...".format(err))
         exit
