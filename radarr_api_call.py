@@ -47,9 +47,8 @@
 #-----------------------------------NOTES---------------------------------------
 
 import json
-from bs4 import BeautifulSoup
 import requests
-
+import sys
 
 #---------------------------------GET-------------------------------------------
 url = 'http://localhost:7878/api/movies/command?apikey=f7478ccfcd3d4f2da5d5583228df15c9'
@@ -65,30 +64,51 @@ print("response_data: \n {} \n".format(get_response_data))
 #---------------------------------GET-------------------------------------------
 
 #---------------------------------POST------------------------------------------
-url = 'http://localhost:7878/api/movies/command?apikey=f7478ccfcd3d4f2da5d5583228df15c9'
-print("Querying... {} \n".format(url))
+def post_movie(url, title, qualityProfileId, titleSlug, images, tmdbId, year, path, monitored = False):
 
-# this might need to be json.dumps(new_movie) to convert it to a json object
-new_movie = {
-"title" : "{}".format(title),
-"qualityProfileId" : "{}".format(qualityProfileId),
-"titleSlug" : "{}".format(titleSlug),
-"images" : "{}".forat(images),
-"tmdbId" : "{}".format(tmdbId),
-"year" : "{}".format(year),
-"path" : "{}".format(path),
-"monitored" : "{}".format(monitored)
-}
+    try:
+        new_movie = {
+        "title" : "{}".format(str(title)), #string
+        "qualityProfileId" : "{}".format(int(qualityProfileId)), #int
+        "titleSlug" : "{}".format(str(titleSlug)), #string
+        "images" : "{}".format(images), #array
+        "tmdbId" : "{}".format(int(tmdbId)), #int
+        "year" : "{}".format(int(year)), #int
+        "path" : "{}".format(str(path)), #string
+        "monitored" : "{}".format(monitored) #boolean
+        }
 
-post_response = requests.post(url = url, data = params)
-print("url_response: {} \n".format(post_response))
+        #creates new json object
+        new_movie = json.dumps(new_movie)
+        print("new_movie as json: \n {}".format(new_movie))
+
+        # post_response = requests.post(url = url, data = new_movie)
+    except ValueError as err:
+        print("An error occured: {} \n exiting...".format(err))
+        exit
 
 #---------------------------------POST------------------------------------------
 
+def main():
+    url = 'http://localhost:7878/api/movies/command?apikey=f7478ccfcd3d4f2da5d5583228df15c9'
 
+    title = "Assassin's Creed"
+    qualityProfileId = 6
+    titleSlug = "assassins-creed-121856"
+    image = [{
+    "coverType": "poster",
+    "url": "/radarr/MediaCover/1/poster.jpg?lastWrite=636200219330000000"},
+    {
+    "coverType": "banner","url": "/radarr/MediaCover/1/banner.jpg?lastWrite=636200219340000000"
+    }]
+    tmdbId = 121856
+    year = 2016
+    path = "/path/to/Assassin's Creed (2016)"
 
-# def add_movie(url, title, qualityProfileId, titleSlug, images, tmdbid, year, path, monitored = False):
+    post_movie(url, title, qualityProfileId, titleSlug, image, tmdbId, year, path)
 
+if __name__ == '__main__':
+    main()
 
 
 
